@@ -9,17 +9,23 @@
     </div>
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg>
+        {{-- <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg> --}}
+        <div style="overflow: hidden" width="100%" height="100%">
+          <img src="img/laravel_bg3.jpg" alt="laravel.bg" style="min-width: 100%">
+        </div>
         <div class="container">
           <div class="carousel-caption text-start">
             <h1>Welcome To My First Laravel Project</h1>
             <p class="opacity-75">In this project i tried to make a simple blogger website using Laravel.</p>
-            <p><a class="btn btn-lg btn-primary" href="/blog">Go To The Blog Page</a></p>
-          </div>
+            <p><a class="btn btn-lg btn-danger" href="/blog">Blog Page</a></p>
+         </div>
         </div>
       </div>
       <div class="carousel-item">
-        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg>
+        {{-- <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg> --}}
+        <div style="overflow: hidden" width="100%" height="100%">
+          <img src="img/laravel_bg3.jpg" alt="laravel.bg" style="min-width: 100%">
+        </div>
         <div class="container">
           <div class="carousel-caption">
             <h1>Features In This Website</h1>
@@ -28,12 +34,15 @@
         </div>
       </div>
       <div class="carousel-item">
-        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg>
+        {{-- <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg> --}}
+        <div style="overflow: hidden" width="100%" height="100%">
+          <img src="img/laravel_bg3.jpg" alt="laravel.bg" style="min-width: 100%">
+        </div>
         <div class="container">
           <div class="carousel-caption text-end">
             <h1>Lets Get Started</h1>
             <p>Get To Know More About This Website</p>
-            <p><a class="btn btn-lg btn-primary" href="/login">Lets Go</a></p>
+            <p><a class="btn btn-lg btn-danger" href="/login">Lets Go</a></p>
           </div>
         </div>
       </div>
@@ -101,7 +110,7 @@
         <p class="lead">Some of my notable projects are this blogger website, basic turn base game using C++, a portfolio website and school website with basic vanilla PHP. You can find more of my projects in my <a href="https://github.com/AlbiAkhsanul">Github Page</a>.</p>
       </div>
       <div class="col-md-5 order-md-1">
-        <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="var(--bs-secondary-bg)"/><text x="50%" y="50%" fill="var(--bs-secondary-color)" dy=".3em">500x500</text></svg>
+        <img src="img/project.jpg" alt="programming_language" width="500" height="500" class="img-fluid mx-auto">
       </div>
     </div>
 
