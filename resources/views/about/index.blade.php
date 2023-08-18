@@ -29,7 +29,7 @@
         <div class="container">
           <div class="carousel-caption">
             <h1>Features In This Website</h1>
-            <p>We Have The Basic CRUD, Authentication and Authorization</p>
+            <p>We Have The Basic CRUD, Authentication and Authorization Mechanism</p>
           </div>
         </div>
       </div>
