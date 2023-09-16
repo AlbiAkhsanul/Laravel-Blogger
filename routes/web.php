@@ -20,19 +20,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('home.index',[
+    return view('home.index', [
         'title' => 'Home'
     ]);
 });
 
 Route::get('/home', function () {
-    return view('home.index',[
+    return view('home.index', [
         'title' => 'Home'
     ]);
 });
 
 Route::get('/about', function () {
-    return view('about.index',[
+    return view('about.index', [
         'title' => 'About',
     ]);
 });
@@ -40,17 +40,17 @@ Route::get('/about', function () {
 Route::get('/blog', [PostController::class, 'index']);
 Route::get('/blog/{post:slug}', [PostController::class, 'getPostBySlug']);
 
-Route::get('/categories',[CategoryController::class, 'index']);
+Route::get('/categories', [CategoryController::class, 'index']);
 
-Route::get('/login',[LoginController::class, 'index'])->name('login')->middleware('guest');
-Route::post('/login',[LoginController::class, 'authenticate']);
-Route::post('/logout',[LoginController::class, 'logout'])->middleware('auth');
+Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
+Route::post('/login', [LoginController::class, 'authenticate']);
+Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth');
 
-Route::get('/register',[RegisterController::class, 'create'])->middleware('guest');
-Route::post('/register',[RegisterController::class, 'store']);
+Route::get('/register', [RegisterController::class, 'create'])->middleware('guest');
+Route::post('/register', [RegisterController::class, 'store']);
 
-Route::get('/dashboard',function(){
-    return view('dashboard.index',[
+Route::get('/dashboard', function () {
+    return view('dashboard.index', [
         'title' => 'Dashboard'
     ]);
 })->middleware('auth');

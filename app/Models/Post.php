@@ -18,10 +18,11 @@ class Post extends Model
     //     'body'
     // ];
 
-    protected $guarded = ['id','timestamps'];
-    protected $with = ['category','user'];
+    protected $guarded = ['id', 'timestamps'];
+    protected $with = ['category', 'user'];
 
-    public function scopeFilter($query, array $filters){
+    public function scopeFilter($query, array $filters)
+    {
         // if(isset($filters['search']) ? $filters['search'] : false){
         //     return $query->where('title','like','%'.$filters['search'].'%')
         //                  ->orWhere('body','like','%'.$filters['search'].'%');
@@ -34,34 +35,44 @@ class Post extends Model
         //     });
         // }); using function
 
-        $query->when(($filters['search']) ?? false, fn($query,$search) =>
-            $query->where(fn($query) =>
-                    $query->where('title', 'like', '%' . $search . '%')
-                          ->orWhere('body', 'like', '%' . $search . '%')
-                          ->orWhere('exercpt', 'like', '%' . $search . '%')
+        $query->when(($filters['search']) ?? false,
+            fn ($query, $search) =>
+            $query->where(
+                fn ($query) =>
+                $query->where('title', 'like', '%' . $search . '%')
+                    ->orWhere('body', 'like', '%' . $search . '%')
+                    ->orWhere('exercpt', 'like', '%' . $search . '%')
             )
         ); // using arrow function
 
-        $query->when(($filters['category']) ?? false, fn($query,$category) =>
-            $query->whereHas('category',fn($query) =>
-                $query->where('slug',$category)
+        $query->when(($filters['category']) ?? false,
+            fn ($query, $category) =>
+            $query->whereHas(
+                'category',
+                fn ($query) =>
+                $query->where('slug', $category)
             )
         );
 
-        $query->when(($filters['user']) ?? false, fn($query,$user) =>
-            $query->whereHas('user',fn($query) =>
-                $query->where('username',$user)
+        $query->when(($filters['user']) ?? false,
+            fn ($query, $user) =>
+            $query->whereHas(
+                'user',
+                fn ($query) =>
+                $query->where('username', $user)
             )
         );
     }
 
     // This table relationship with category table
-    public function category(){
+    public function category()
+    {
         return $this->belongsTo(Category::class);
     }
 
     // This table relationship with user table
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 

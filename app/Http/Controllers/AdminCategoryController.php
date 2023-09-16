@@ -14,7 +14,7 @@ class AdminCategoryController extends Controller
      */
     public function index()
     {
-        return view('dashboard.categories.index',[
+        return view('dashboard.categories.index', [
             'title' => 'Post Categories',
             'categories' => Category::orderBy('name')->get()->all()
         ]);
@@ -25,10 +25,9 @@ class AdminCategoryController extends Controller
      */
     public function create()
     {
-        return view('dashboard.categories.create',[
+        return view('dashboard.categories.create', [
             'title' => 'New Category',
         ]);
-
     }
 
     /**
@@ -36,19 +35,19 @@ class AdminCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $rules =[
-            'name' => ['required','min:3','max:30'],
-            'image' => ['image','file','max:2000'],
+        $rules = [
+            'name' => ['required', 'min:3', 'max:30'],
+            'image' => ['image', 'file', 'max:2000'],
         ];
 
         $validatedData = $request->validate($rules);
 
-        if($request->file('image')){
+        if ($request->file('image')) {
             $validatedData['image'] = $request->file('image')->store('category-images');
         }
 
         Category::create($validatedData);
-        return redirect('/dashboard/categories')->with('success','Succesfully Added A New Category!');
+        return redirect('/dashboard/categories')->with('success', 'Succesfully Added A New Category!');
     }
 
     /**
@@ -64,7 +63,7 @@ class AdminCategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        return view('dashboard.categories.edit',[
+        return view('dashboard.categories.edit', [
             'title' => 'Edit Category',
             'category' => $category,
         ]);
@@ -75,28 +74,28 @@ class AdminCategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        $rules =[
-            'name' => ['required','min:3','max:20'],
-            'image' => ['image','file','max:2000'],
+        $rules = [
+            'name' => ['required', 'min:3', 'max:20'],
+            'image' => ['image', 'file', 'max:2000'],
         ];
 
-        if($request->slug != $category->slug){
-            $rules['slug'] = ['required','unique:posts'];  
+        if ($request->slug != $category->slug) {
+            $rules['slug'] = ['required', 'unique:posts'];
         };
 
         $validatedData = $request->validate($rules);
 
-        if($request->file('image')){
-            if($request->oldImage){
+        if ($request->file('image')) {
+            if ($request->oldImage) {
                 Storage::delete($request->oldImage);
             }
             $validatedData['image'] = $request->file('image')->store('category-images');
         }
 
-        Category::where('id',$category->id)
+        Category::where('id', $category->id)
             ->update($validatedData);
 
-        return redirect('/dashboard/categories')->with('success','Succesfully Edit Category!');
+        return redirect('/dashboard/categories')->with('success', 'Succesfully Edit Category!');
     }
 
     /**
@@ -104,15 +103,16 @@ class AdminCategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        if($category->image){
+        if ($category->image) {
             Storage::delete($category->image);
         }
 
         Category::destroy($category->id);
-        return redirect('/dashboard/categories')->with('success','Succesfully Deleted A Category!');
+        return redirect('/dashboard/categories')->with('success', 'Succesfully Deleted A Category!');
     }
 
-    public function checkSlug(Request $request){
+    public function checkSlug(Request $request)
+    {
         $slug = SlugService::createSlug(Category::class, 'slug', $request->name);
 
         return response()->json(['slug' => $slug]);

@@ -28,7 +28,8 @@
   <div class="py-2 px-4" style="width: 100%; background-color: rgba(0,0,0,0.7)">
     <div class="col-lg-8 px-0 text-white">
       <h1 class="display-4 fst-italic">{{ $posts[0]->title }}</h1>
-      <p class="lead my-3">{{ $posts[0]->exercpt }}</p>
+      <p class="lead my-3">{!! $posts[0]->exercpt !!}</p>
+      {{-- {!! $post->body !!} Unprotected echo (html variables can be called) --}}
       <a href="/blog/{{ $posts[0]->slug }}" class="btn btn-danger fs-5 mt-2">Read More</a>
     </div>
   </div>

@@ -10,10 +10,11 @@ class Category extends Model
 {
     use HasFactory, Sluggable;
 
-    protected $guarded = ['id','timestamps'];
+    protected $guarded = ['id', 'timestamps'];
 
     // This table relationship with post table
-    public function posts(){
+    public function posts()
+    {
         return $this->hasMany(Post::class);
     }
 

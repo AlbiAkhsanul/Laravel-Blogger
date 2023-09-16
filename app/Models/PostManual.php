@@ -2,7 +2,8 @@
 
 namespace App\Models;
 
-class PostManual {
+class PostManual
+{
     private static $posts = [
         [
             'title' => 'Title Number One',
@@ -24,12 +25,14 @@ class PostManual {
         ]
     ];
 
-    public static function getAll(){
+    public static function getAll()
+    {
         return collect(self::$posts);
-    } 
+    }
 
-    public static function getPostBySlug($slug){
+    public static function getPostBySlug($slug)
+    {
         $posts = static::getAll();
-        return $posts->firstWhere('slug',$slug); //Where $post(singular)['slug] === $slug
+        return $posts->firstWhere('slug', $slug); //Where $post(singular)['slug] === $slug
     }
 }

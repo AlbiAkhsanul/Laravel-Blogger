@@ -7,10 +7,11 @@ use App\Models\Category;
 
 class CategoryController extends Controller
 {
-    public function index(){
-        return view('category.index',[
+    public function index()
+    {
+        return view('category.index', [
             'title' => 'Categories',
-            'categories' => Category::all() 
+            'categories' => Category::all()
         ]);
     }
 }

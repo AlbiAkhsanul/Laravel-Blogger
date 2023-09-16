@@ -16,7 +16,7 @@ class DashboardPostController extends Controller
      */
     public function index()
     {
-        return view('dashboard.posts.index',[
+        return view('dashboard.posts.index', [
             'title' => 'My Posts',
             'posts' => Post::where('user_id', auth()->user()->id)->orderBy('title')->get()->all()
         ]);
@@ -27,7 +27,7 @@ class DashboardPostController extends Controller
      */
     public function create()
     {
-        return view('dashboard.posts.create',[
+        return view('dashboard.posts.create', [
             'title' => 'New Post',
             'categories' => Category::orderBy('name')->get()->all()
         ]);
@@ -39,24 +39,24 @@ class DashboardPostController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'title' => ['required','min:5','max:40'],
-            'slug' => ['required','unique:posts'],
+            'title' => ['required', 'min:5', 'max:40'],
+            'slug' => ['required', 'unique:posts'],
             'category_id' => ['required'],
-            'image' => ['image','file','max:5000'],
-            'body' => ['required','min:30']
+            'image' => ['image', 'file', 'max:5000'],
+            'body' => ['required', 'min:30']
         ];
 
         $validatedData = $request->validate($rules);
 
-        if($request->file('image')){
+        if ($request->file('image')) {
             $validatedData['image'] = $request->file('image')->store('post-images');
         }
 
         $validatedData['user_id'] = auth()->user()->id;
-        $validatedData['exercpt'] = Str::limit(strip_tags($request->body),200,'...');
+        $validatedData['exercpt'] = Str::limit(strip_tags($request->body), 200, '...');
 
         Post::create($validatedData);
-        return redirect('/dashboard/posts')->with('success','Succesfully Added A New Post!');
+        return redirect('/dashboard/posts')->with('success', 'Succesfully Added A New Post!');
     }
 
     /**
@@ -64,11 +64,11 @@ class DashboardPostController extends Controller
      */
     public function show(Post $post)
     {
-        if($post->user_id !== auth()->user()->id) {
+        if ($post->user_id !== auth()->user()->id) {
             abort(403);
         }
 
-        return view('dashboard.posts.show',[
+        return view('dashboard.posts.show', [
             'title' => $post->title,
             'post' => $post
         ]);
@@ -79,11 +79,11 @@ class DashboardPostController extends Controller
      */
     public function edit(Post $post)
     {
-        if($post->user_id !== auth()->user()->id) {
+        if ($post->user_id !== auth()->user()->id) {
             abort(403);
         }
 
-        return view('dashboard.posts.edit',[
+        return view('dashboard.posts.edit', [
             'title' => 'Edit Post',
             'post' => $post,
             'categories' => Category::all()
@@ -95,33 +95,33 @@ class DashboardPostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        $rules =[
-            'title' => ['required','min:5','max:70'],
+        $rules = [
+            'title' => ['required', 'min:5', 'max:70'],
             'category_id' => ['required'],
-            'image' => ['image','file','max:5000'],
-            'body' => ['required','min:30']
+            'image' => ['image', 'file', 'max:5000'],
+            'body' => ['required', 'min:30']
         ];
 
-        if($request->slug != $post->slug){
-          $rules['slug'] = ['required','unique:posts'];  
+        if ($request->slug != $post->slug) {
+            $rules['slug'] = ['required', 'unique:posts'];
         };
 
         $validatedData = $request->validate($rules);
 
-        if($request->file('image')){
-            if($request->oldImage){
+        if ($request->file('image')) {
+            if ($request->oldImage) {
                 Storage::delete($request->oldImage);
             }
             $validatedData['image'] = $request->file('image')->store('post-images');
         }
 
         $validatedData['user_id'] = auth()->user()->id;
-        $validatedData['exercpt'] = Str::limit(strip_tags($request->body),200,'...');
+        $validatedData['exercpt'] = Str::limit(strip_tags($request->body), 200, '...');
 
-        Post::where('id',$post->id)
+        Post::where('id', $post->id)
             ->update($validatedData);
 
-        return redirect('/dashboard/posts')->with('success','Succesfully Edit Post!');
+        return redirect('/dashboard/posts')->with('success', 'Succesfully Edit Post!');
     }
 
     /**
@@ -129,19 +129,20 @@ class DashboardPostController extends Controller
      */
     public function destroy(Post $post)
     {
-        if($post->user_id !== auth()->user()->id) {
+        if ($post->user_id !== auth()->user()->id) {
             abort(403);
         }
-        
-        if($post->image){
+
+        if ($post->image) {
             Storage::delete($post->image);
         }
 
         Post::destroy($post->id);
-        return redirect('/dashboard/posts')->with('success','Succesfully Deleted A Post!');
+        return redirect('/dashboard/posts')->with('success', 'Succesfully Deleted A Post!');
     }
 
-    public function checkSlug(Request $request){
+    public function checkSlug(Request $request)
+    {
         $slug = SlugService::createSlug(Post::class, 'slug', $request->title);
 
         return response()->json(['slug' => $slug]);
